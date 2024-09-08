@@ -1,77 +1,69 @@
-var ms = 0, s = 0, m = 0, h = 0
-var timer
-
-var display = document.querySelector('.timer');
-var laps = document.querySelector('.laps');
-
-// start function start 
-
-function start(){
-    if (!timer) {
-        timer = setInterval(run, 10)
-    }
+:root{
+    --blue: #4f27ae;
+    --black: #444;
+    --light-color: #777;
+    --bg-color: #e6e6e6;
+    --border: .1rem solid rgba(0,0,0,.2);
+    --box-shadow: .4rem .4rem 1rem #ccc,
+    -.4rem  -.4rem 1rem #fff;
+    --box-shadow-inset: inset .4rem .4rem 1rem #ccc,
+   inset -.4rem  -.4rem 1rem #fff;
 }
-
-function run(){
-    display.innerHTML = getTimer()
-    ms++
-    if (ms == 100) {
-        ms = 0
-        s++
-    }
-    if(s == 60){
-        s = 0
-        m++ 
-    }
-    if(m == 60){
-        m = 0
-        h++
-    }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-function getTimer(){
-    return(h<10 ? "0" + h : h)+ " : " +(m<10 ? "0" + m : m) + " : " +  (s<10 ? "0" + s : s) + " : " + (ms<10 ? "0" + ms : ms)
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
 }
+.box{
+    width: 40%;
+    min-width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-color);
+    box-shadow: var(--box-shadow);
+    border-radius: 1.5rem;
+    color: var(--light-color);
+    padding-bottom: 4rem;
+    
 
-// stop function start 
-function stop() {
-    stopTimer()
 }
-function stopTimer(){
-    clearInterval(timer)
-    timer = false
+.timer{
+    border-bottom: 1px solid var(--black);
+    padding: 2.5rem 0rem;
+    display: flex;
+    justify-content: center;
+    font-size: 2.3rem;
+    align-items: center;
 }
-
-//reset function start here
-function reset(){
-    stopTimer()
-    ms = 0
-    s = 0
-    m = 0
-    h = 0
-    display.innerHTML = getTimer()
+.laps{
+    text-align: center;
+    color: var(--light-color);
+    margin-top: 1.5rem;
 }
-
-// restart function start here
-
-function restart() {
-    if (timer) {
-        reset()
-        start()
-    }
+.features{
+    text-align: center;
+    display: grid;
+    margin: 6rem auto 0 auto;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
 }
-
-//lap function start here
-
-function lap(){
-    if(timer){
-        var li = document.createElement("li")
-        li.innerHTML = getTimer()
-        laps.appendChild(li)
-    }
+button{
+    background-color: transparent;
+    border: none;
+    box-shadow: var(--box-shadow);
+    padding: 1.2rem 2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    color: var(--light-color);
 }
-
-// reset lap start here
-
-function resetlap(){
-    laps.innerHTML = ""
+button:hover{
+    color: var(--blue);
+    box-shadow: var(--box-shadow-inset);
 }
